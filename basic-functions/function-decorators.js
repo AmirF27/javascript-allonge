@@ -11,9 +11,9 @@ var people = ["David", "Sarah", "James"];
 function onlyOnce(fn) {
     var executed = false;
 
-    return function(name) {
+    return function(...args) {
         if (!executed) {
-            fn(name);
+            fn(args);
             executed = true;
         }
         else {
@@ -42,7 +42,7 @@ sayHello = onlyOnce(sayHello);
 console.log("\nAfter decorator:");
 for (let person of people) {
     try {
-        sayHello(person);
+        sayHello(person, "fdfs");
     } catch (e) {
         console.log(`Sorry, ${person}, I've already said hello.`);
     }
