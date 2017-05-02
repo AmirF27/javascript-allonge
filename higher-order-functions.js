@@ -13,9 +13,11 @@ function mapArray(arr, fn) {
 var a = [1, 2, 3];
 
 console.log(`Before map: ${a}`);
+// 1,2,3
 
 mapArray(a, function(item) {
     return item ** 2;
 });
 
 console.log(`After map: ${a}`);
+// 1,4,9
