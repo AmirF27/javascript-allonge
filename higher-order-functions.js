@@ -20,4 +20,5 @@ mapArray(a, function(item) {
 });
 
 console.log(`After map: ${a}`);
+// Output:
 // 1,4,9
