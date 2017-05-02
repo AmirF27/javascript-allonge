@@ -1,7 +1,7 @@
 /*
  * An example of combinators.
  *
- * compose takes two function, and returns a new function that when invoked,
+ * compose takes two functions, and returns a new function that when invoked,
  * executes the two functions it takes in order.
  *
  * compose is a combinator because it takes only functions and returns a function
