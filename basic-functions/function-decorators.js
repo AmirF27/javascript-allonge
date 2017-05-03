@@ -5,7 +5,19 @@
  * version of it.
 **/
 
-var people = ["David", "Sarah", "James"];
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.sayHello = function() {
+    console.log(`Hello, ${this.name}!`);
+}
+
+var people = [
+    new Person("David"),
+    new Person("Sarah"),
+    new Person("James")
+];
 
 // decorator that restricts a function to execute only once
 function onlyOnce(fn) {
@@ -13,8 +25,7 @@ function onlyOnce(fn) {
 
     return function(...args) {
         if (!executed) {
-            fn(args);
-            executed = true;
+            return (executed = true, fn.apply(this, args));
         }
         else {
             throw new Error(`${fn.name} is allowed to execute only once`);
@@ -22,13 +33,13 @@ function onlyOnce(fn) {
     }
 }
 
-function sayHello(name) {
-    console.log(`Hello, ${name}!`);
-}
+// function sayHello(name) {
+//     console.log(`Hello, ${name}!`);
+// }
 
 console.log("Before decorator:");
 for (let person of people) {
-    sayHello(person);
+    person.sayHello();
 }
 // Output:
 // Before decorator:
@@ -37,14 +48,14 @@ for (let person of people) {
 // Hello, James!
 
 // modify to disallow multiple executions
-sayHello = onlyOnce(sayHello);
+Person.prototype.sayHello = onlyOnce(Person.prototype.sayHello);
 
 console.log("\nAfter decorator:");
 for (let person of people) {
     try {
-        sayHello(person, "fdfs");
+        person.sayHello();
     } catch (e) {
-        console.log(`Sorry, ${person}, I've already said hello.`);
+        console.log(`Sorry, ${person.name}, I've already said hello.`);
     }
 }
 // Output:
